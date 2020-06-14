@@ -44,11 +44,6 @@ axios.interceptors.response.use(
         return Promise.reject(err);
     }
 );
-
-
-
-
-
     export function myGet(url, params) {
         let _url = base + url
         return new Promise((resolve, reject) => {
@@ -64,7 +59,7 @@ axios.interceptors.response.use(
     export  function myPost(url, params) {
         let _url = base + url
         return new Promise((resolve, reject) => {
-            axios.post(_url, qs.stringify(params)).then(function (response) {
+            axios.post(_url, params).then(function (response) {
                 resolve(response.data)
             })
                 .catch(function (err) {

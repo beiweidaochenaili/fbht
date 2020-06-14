@@ -12,6 +12,15 @@ export default class Header extends Component {
             visible:false
         }
     }
+    logout=()=>{
+        sessionStorage.setItem("user","")
+        sessionStorage.setItem("menulist","")
+        sessionStorage.setItem("SelectedKeys","")
+        sessionStorage.setItem("user","")
+        localStorage.setItem("token","")
+        history.push("/login") 
+    
+    }
     render() {
         const menu = (
             <Menu>
@@ -19,7 +28,7 @@ export default class Header extends Component {
                     <a onClick={()=>{this.setState({visible:true})}}>修改密码</a>
                 </Menu.Item>
                 <Menu.Item key="1">
-                    <a onClick={()=>{history.push("/login")}}>退出登录</a>
+                    <a onClick={this.logout}>退出登录</a>
                 </Menu.Item>
 
             </Menu>

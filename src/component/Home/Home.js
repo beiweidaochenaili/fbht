@@ -13,7 +13,6 @@ export default class Home extends Component {
                 {/* 首页 */}
                 <Header></Header>
                 <Navleft children={this.props.children}></Navleft>
-                 {/* {this.props.children} */}
             </div>
         )
     }

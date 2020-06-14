@@ -8,41 +8,24 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
+import { observer, inject } from "mobx-react";
 const { Header, Content, Footer, Sider } = Layout;
-// const { Item } = Menu;
-export default class Navleft extends Component {
+@inject("device")
+@observer
+class Navleft extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            list: [],
-            collapsed: false,
-            SelectedKeys:["1"]
-        }
-    }
-    componentWillMount(){
-        if(sessionStorage.getItem("SelectedKeys")&&sessionStorage.getItem("SelectedKeys").length>0){
-            let SelectedKeys=JSON.parse(sessionStorage.getItem("SelectedKeys")) 
-            this.setState({
-                SelectedKeys
-            })
-        }
-    }
-    componentDidMount() {
-        const menulist = JSON.parse(sessionStorage.getItem("menulist"))
-        this.setState({
-            list: menulist
-        })
         
     }
-    onCollapse = collapsed => {
-        this.setState({ collapsed });
-    };
-    onSelect=(item,key)=>{
-        this.setState({
-            SelectedKeys:item.selectedKeys
-        })
-        sessionStorage.setItem("SelectedKeys",JSON.stringify(item.selectedKeys))
+    componentWillMount() {
+       
+        this.props.device.searchkey()
     }
+    componentDidMount() {
+       
+        this.props.device.getmenulist()
+    }
+   
     geticon = (id) => {
         switch (id) {
             case 1:
@@ -60,14 +43,13 @@ export default class Navleft extends Component {
         }
     }
     render() {
+        const { list, collapsed, SelectedKeys, onCollapse, onSelect } = this.props.device
         return (
             <Layout style={{ height: "91vh" }}>
-                <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-                    {/* <div className="logo" /> */}
-                    <Menu theme="dark" selectedKeys={this.state.SelectedKeys}  mode="inline"  onSelect={this.onSelect}>
+                <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+                    <Menu theme="dark" selectedKeys={SelectedKeys} mode="inline" onSelect={onSelect}>
                         {
-                            this.state.list.map((item, i) => {
-                                // console.log(item)
+                            list.map((item, i) => {
                                 return <Menu.Item key={item.pmid}>
                                     <Link to={item.path}>
                                         {this.geticon(item.pmid)}<span style={{ marginLeft: 5 }}>{item.title}</span>
@@ -78,19 +60,20 @@ export default class Navleft extends Component {
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    {/* <Header className="site-layout-background" style={{ padding: 0 }} /> */}
                     <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>系统</Breadcrumb.Item>
-                            <Breadcrumb.Item>首页</Breadcrumb.Item>
+                            <Breadcrumb.Item>通讯录系统</Breadcrumb.Item>
+                            <Breadcrumb.Item>{ SelectedKeys== "1"?" 首页": SelectedKeys=="2"?"设备管理":SelectedKeys=="3"?"通讯查看":SelectedKeys=="4"?"短信查看":SelectedKeys=="5"?"用户管理":null}</Breadcrumb.Item>
+                            {/* <Breadcrumb.Item>{ SelectedKeys}</Breadcrumb.Item> */}
                         </Breadcrumb>
                         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                             {this.props.children}
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Copyright©2019-2020 《后台管理系统》 蜀ICP备88888888号</Footer>
+                    {/* <Footer style={{ textAlign: 'center' }}>Copyright©2019-2020 《后台管理系统》 蜀ICP备88888888号</Footer> */}
                 </Layout>
             </Layout>
         )
     }
 }
+export default Navleft;
