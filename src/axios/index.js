@@ -1,3 +1,4 @@
+import React from "react"
 import { message } from "antd";
 import axios from "axios";
 import qs from "qs";
@@ -6,7 +7,7 @@ import {createHashHistory} from 'history';
 const history = createHashHistory();
 
 // let base = "https://www.liulongbin.top:8888/api/private/v1";
-let base = "http://cs.888dfp.com:9070/";
+React.$url = "http://cs.888dfp.com:9070/";
 // 配置
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -16,7 +17,7 @@ axios.defaults.withCredentials = false;
 // 请求前拦截
 axios.interceptors.request.use(
     config => {
-        if (config.url!=="http://cs.888dfp.com:9070/login") {
+        if (config.url!==`${React.$url}login`) {
             if(localStorage.token){
 
                 config.headers.common['Authorization'] = localStorage.token;
@@ -33,9 +34,7 @@ axios.interceptors.request.use(
 // 返回后拦截
 axios.interceptors.response.use(
     response  => {
-    console.log(response)
     if(response.status==400){
-        // console.log(response.data.meta.msg)
         history.push('/login');
     }
         return response ;
@@ -45,7 +44,7 @@ axios.interceptors.response.use(
     }
 );
     export function myGet(url, params) {
-        let _url = base + url
+        let _url = React.$url + url
         return new Promise((resolve, reject) => {
             axios.get(_url, {params}).then(function (response) {
                 resolve(response.data)
@@ -57,7 +56,7 @@ axios.interceptors.response.use(
     }
     
     export  function myPost(url, params) {
-        let _url = base + url
+        let _url = React.$url + url
         return new Promise((resolve, reject) => {
             axios.post(_url, params).then(function (response) {
                 resolve(response.data)
@@ -69,7 +68,7 @@ axios.interceptors.response.use(
     }
 
     export  function myPut(url, params) {
-        let _url = base + url
+        let _url = React.$url + url
         return new Promise((resolve, reject) => {
             axios.put(_url, params).then(function (response) {
                 resolve(response.data)
@@ -81,7 +80,7 @@ axios.interceptors.response.use(
     }
 
     export  function myDelete(url, params) {
-        let _url = base + url
+        let _url = React.$url + url
         return new Promise((resolve, reject) => {
             axios.delete(_url, params).then(function (response) {
                 resolve(response.data)

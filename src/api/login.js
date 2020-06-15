@@ -1,7 +1,6 @@
 import { myPost, myGet, myDelete } from "../axios"
 //登录
 export const login = (params) => {
-    // console.log(params)
     return myPost("login", params)
 }
 export const gethome = (params) => {

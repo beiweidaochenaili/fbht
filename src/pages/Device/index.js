@@ -22,7 +22,6 @@ class Device extends Component {
     }
      //显示地图弹通知提醒框
     openNotification = (text) => {
-        // console.log(text)
         notification.open({
             message: '地图位置',
             placement: "topRight",
@@ -76,22 +75,26 @@ class Device extends Component {
                 dataIndex: 'deal',
                 key: 'deal',
                 render: (text, record) => {
-                    // console.log(text)
-                    // console.log(record)
                     return (
-                        <div className="deal">
+                        <div >
+                            <div className="deal">
+
                             <a onClick={() => { this.props.device.showduanxinmodal(record.wid) }}> <EditOutlined />查看短信</a>
                             <a onClick={() => { this.props.device.showtongxunlumodal(record.wid) }}> <EditOutlined />查看通讯录</a>
                             <a onClick={() => { this.props.device.showphotomodal(record.wid) }}> <EditOutlined />查看相册</a>
                             <a onClick={() => { addoutshebeitongxunlu(record.wid, record.phone) }}> <CodepenOutlined />导出通讯录</a>
+                            </div>
+                            <div className="deal1">
+
                             <a onClick={() => { addoutshebeiduanxin(record.wid, record.phone) }}> <CodepenOutlined />导出短信</a>
                             <a onClick={() => { downpic(record.wid, record.phone) }}> <CodepenOutlined />导出相册</a>
                             <a onClick={() => { deletemodalshow({ type: "deleteshebei", pid: record.pid }) }}> <DeleteOutlined />删除</a>
+                            </div>
 
                         </div>
                     )
                 }
-            },
+            },     
         ]
         return (
             <div className="device">

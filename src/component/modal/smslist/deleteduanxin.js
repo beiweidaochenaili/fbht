@@ -8,7 +8,6 @@ export default class Deleteduanxin extends Component {
     }
     onOk=()=>{
         deleteduanxin({sid:this.props.sid}).then(res=>{
-            console.log(res)
             if(res.code==200){
                 message.success("删除成功")
                 this.props.closemodal()

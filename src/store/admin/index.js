@@ -36,7 +36,6 @@ class Admins {
     //收集表单数据
     @action onFinish = (val) => {
         adduser({ ...val, role: this.role }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("添加成功")
                 this.addusermodalhide()

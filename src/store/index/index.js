@@ -28,12 +28,20 @@ class indexpage {
     @action gethome2 = () => {
         getStatistics().then(res => {
             if (res.code == 200) {
-                console.log(res)
                 var myChart = echarts.init(document.getElementById('main'));
                 const option = {}
                 option.xAxis = { data: res.date, boundaryGap: false }
                 option.yAxis = {
                     type: 'value'
+                }
+                option.tooltip={
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
                 }
                 var a = []
                 var b = []

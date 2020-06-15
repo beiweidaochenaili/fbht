@@ -10,7 +10,6 @@ class smslist {
     @action getduanxinlist = () => {
         this.loading=true
         getduanxinlist({ curPage: 1, pageSize: 10 }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 this.loading=false
                 res.data.forEach(element => {
@@ -27,10 +26,8 @@ class smslist {
     //导出excel
     @action addoutduanxin = () => {
         addoutduanxinlist().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 const data = res.data  // 准备的数据
-                console.log(data)
                 var option = {}
                 let dataTable = []
                 if (data) {

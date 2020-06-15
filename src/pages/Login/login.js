@@ -8,7 +8,6 @@ const { Item } =Form
 export default class Login extends Component {
     onFinish=(val)=>{
         login(val).then(res=>{
-            console.log(res)
             if(res.code==200){
                 message.success("登录成功")
                 localStorage.setItem("token",res.user.token)

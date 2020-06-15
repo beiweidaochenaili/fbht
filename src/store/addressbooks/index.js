@@ -9,7 +9,6 @@ class Addressbooks {
     @action getcom = () => {
         this.loading = true
         getcom({ curPage: 1, pageSize: 10 }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 this.loading = false
                 res.data.forEach(element => {
@@ -25,10 +24,8 @@ class Addressbooks {
     //导出所有通讯录
     @action addouttongxunluexcel = () => {
         tongxunlulist().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 const data = res.data  // 准备的数据
-                console.log(data)
                 var option = {}
                 let dataTable = []
                 if (data) {

@@ -42,10 +42,10 @@ class Duanxin extends Component {
                 key: 'position',
                 render: (text, record) => {
                     return (
-                        <div className="deleteduanxin" onClick={() => { this.props.device.deletemodalshow({ type: "deleteduanxin", id: record.sid }) }}>
+                        <a className="deleteduanxin" style={{padding:"5px 10px"}} onClick={() => { this.props.device.deletemodalshow({ type: "deleteduanxin", id: record.sid }) }}>
                             <DeleteOutlined />
                            删除
-                        </div >
+                        </a >
                     )
                 }
 

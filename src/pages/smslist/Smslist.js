@@ -41,14 +41,13 @@ import Deleteinfo from '../../component/modal/device/deleteinfo';
                 dataIndex: 'position',
                 key: 'position',
                 render: (text, record) => {
-                    // console.log(record)
                     return (
-                        <div className="deleteduanxin" onClick={()=>{ deletemodalshow({type:"deleteduanxin",id:record.sid})}}>
+                        <a className="deleteduanxin" style={{padding:"5px 10px"}} onClick={()=>{ deletemodalshow({type:"deleteduanxin",id:record.sid})}}>
 
                             <DeleteOutlined />
                            删除
 
-                        </div >
+                        </a >
                     )
                 }
 

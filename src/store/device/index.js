@@ -1,3 +1,4 @@
+import React from "react"
 import { observable, action, runInAction } from "mobx";
 import { getdevice, getshebeiduanxinlist, deleteshebeiduanxin, deleteduanxin, getcoms, deleteshebeialltongxunlu, deletetongxunlu, getexcel, addouttongxunlu, addoutduanxin, deleteallshebei, deleteshebei, onsearch, deletetongxunluall, deleteallduanxin, deleteuser, getphoto, deletephoto, deleteallphoto, downpic } from "../../api/login";
 import { message } from "antd"
@@ -29,7 +30,6 @@ class Device {
     @action getshebeilist = () => {
         this.loading = true
         getdevice({ curPage: 1, pageSize: 10 }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 this.loading = false
                 res.data.forEach(element => {
@@ -67,7 +67,6 @@ class Device {
     @action getshebeiduanxinlist = () => {
         this.loading = true
         getshebeiduanxinlist({ wid: this.wid, curPage: 1, pageSize: 10 }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 this.loading = false
                 res.data.forEach(element => {
@@ -135,7 +134,6 @@ class Device {
     //删除设备全部短信
     @action deleteshebeiduanxin = () => {
         deleteshebeiduanxin({ wid: this.wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal();
@@ -148,7 +146,6 @@ class Device {
     //删除设备单条短信
     @action deleteduanxin = (callback) => {
         deleteduanxin({ sid: this.params.id }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal();
@@ -165,12 +162,11 @@ class Device {
     @action getshebeitongxunlulist = () => {
         this.loading = true
         getcoms({ curPage: 1, pageSize: 10, wid: this.wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
 
                 this.loading = false
                 res.data.forEach(element => {
-                    element.key = element.sid
+                    element.key = element.uid
                 });
                 this.dataSource_tongxunlumodal = res.data
 
@@ -183,7 +179,6 @@ class Device {
     //删除设备全部通讯录
     @action deleteshebeitongxunlu = () => {
         deleteshebeialltongxunlu({ wid: this.wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal();
@@ -197,7 +192,6 @@ class Device {
     //删除设备单条通讯录
     @action deletetongxunlu = (callback) => {
         deletetongxunlu({ uid: this.params.id }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal();
@@ -214,10 +208,8 @@ class Device {
     //导出excel表
     @action getexcel = () => {
         getexcel().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 const data = res.data  // 准备的数据
-                console.log(data)
                 var option = {}
                 let dataTable = []
                 if (data) {
@@ -256,10 +248,8 @@ class Device {
     //导出通讯录
     @action addoutshebeitongxunlu = (wid, phone) => {
         addouttongxunlu({ wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 const data = res.data  // 准备的数据
-                console.log(data)
                 var option = {}
                 let dataTable = []
                 if (data) {
@@ -296,10 +286,8 @@ class Device {
     //导出短信列表
     @action addoutshebeiduanxin = (wid, phone) => {
         addoutduanxin({ wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 const data = res.data  // 准备的数据
-                console.log(data)
                 var option = {}
                 let dataTable = []
                 if (data) {
@@ -338,7 +326,6 @@ class Device {
     //删除全部设备
     @action deleteallshebei = () => {
         deleteallshebei().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal();
@@ -350,7 +337,6 @@ class Device {
     //删除单条设备
     @action deleteshebei = () => {
         deleteshebei({ pid: this.params.pid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -363,9 +349,7 @@ class Device {
 
     //搜索框
     @action onSearch = (val) => {
-        console.log(val)
         onsearch({ content: val }).then(res => {
-            // console.log(res)
             if (res.code == 200) {
                 res.data.forEach(element => {
                     element.key = element.pid
@@ -379,7 +363,6 @@ class Device {
     //清空所有通讯录
     @action deletealltongxunlu = (callback) => {
         deletetongxunluall().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -392,7 +375,6 @@ class Device {
     //清空所有短信
     @action deleteallduanxin = (callback) => {
         deleteallduanxin().then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -405,7 +387,6 @@ class Device {
     //删除用户
     @action deleteuser = (callback) => {
         deleteuser({ uid: this.params.id }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -444,7 +425,6 @@ class Device {
     //删除单张照片
     @action deletephoto = () => {
         deletephoto({ sid: this.params.id }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -457,7 +437,6 @@ class Device {
     //清空相册
     @action deleteallphoto = () => {
         deleteallphoto({ wid: this.wid }).then(res => {
-            console.log(res)
             if (res.code == 200) {
                 message.success("删除成功")
                 this.closedeletemodal()
@@ -470,9 +449,8 @@ class Device {
     //导出相册
     @action downpic = (wid, phone) => {
         downpic({ wid, phone }).then(res => {
-            console.log(res)
             if (res.code == 200) {
-                window.location.href = `http://cs.888dfp.com:9070${res.url}`
+                window.location.href = `${React.$url}${res.url}`
             }
         }).catch(err => {
             console.log(err)
@@ -491,7 +469,6 @@ class Device {
     }
     //控制菜单收缩
     @action onCollapse = collapsed => {
-        console.log(collapsed)
         this.collapsed = collapsed
     };
     //控制菜单选中

@@ -37,7 +37,7 @@ import Deleteinfo from '../../component/modal/device/deleteinfo';
                 dataIndex: 'time',
                 key: 'time',
                 render: (text) => {
-                    return <div style={{ textAlign: "center" }}>{moment(Number(text)).format("YYYY-MM-DD HH:mm:ss")}</div>
+                    return <div style={{ textAlign: "center" }}>{moment(Number(text)*1000).format("YYYY-MM-DD HH:mm:ss")}</div>
                 }
             },
             {
@@ -46,10 +46,10 @@ import Deleteinfo from '../../component/modal/device/deleteinfo';
                 key: 'position',
                 render: (text, record) => {
                     return (
-                        <div className="deleteduanxin" onClick={()=>{deletemodalshow({type:"deletetongxunlu",id:record.uid})}}>                           
+                        <a className="deleteduanxin" style={{padding:"5px 10px"}} onClick={()=>{deletemodalshow({type:"deletetongxunlu",id:record.uid})}}>                           
                                 <DeleteOutlined />
                            删除        
-                        </div >
+                        </a >
                     )
                 }
             },

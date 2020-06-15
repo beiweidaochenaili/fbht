@@ -38,7 +38,6 @@ class Admin extends Component {
                 key: 'logintime',
                 // width: "30%"
                 render: (text, record) => {
-                    // console.log(text)
                     return <div>{momnet(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}</div>
                 }
             },
@@ -57,14 +56,13 @@ class Admin extends Component {
                 dataIndex: 'position',
                 key: 'position',
                 render: (text, record) => {
-                    // console.log(record)
                     if (record.username == "admin") {
                         return <Button disabled >删除</Button>
                     } else {
                         return (
-                            <div className="deleteduanxin" onClick={() => { deletemodalshow({ type: "deleteuser", id: record.uid }) }}>
+                            <a className="deleteduanxin" style={{padding:"8px 20px"}} onClick={() => { deletemodalshow({ type: "deleteuser", id: record.uid }) }}>
                                 删除
-                            </div >
+                            </a >
                         )
                     }
                 }

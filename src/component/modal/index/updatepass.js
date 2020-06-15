@@ -13,10 +13,8 @@ export default class Updatepass extends Component {
         }
     }
     onFinish=(val)=>{
-        console.log(val)
         if(val.setpwd==val.setpwd2){
             updatepass(val).then(res=>{
-                // console.log(res)
                 if(res.code==200){
                     message.success("修改成功")
                     this.props.closemodal()

@@ -43,10 +43,10 @@ class Tongxunlu extends Component {
                 render: (text, record) => {
                     
                     return (
-                        <div className="deleteduanxin" onClick={()=>{deletemodalshow({type:"deletetongxunlu",id:record.uid})}}>  
+                        <a className="deleteduanxin" style={{padding:"5px 10px"}} onClick={()=>{deletemodalshow({type:"deletetongxunlu",id:record.uid})}}>  
                                 <DeleteOutlined />
                            删除
-                        </div >
+                        </a >
                     )
                 }
 
