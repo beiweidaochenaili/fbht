@@ -23,7 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-zmage": "^0.8.5-beta.36",
-    "xlsx": "^0.16.1"
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
